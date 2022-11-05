@@ -1,0 +1,39 @@
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Stream;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		
+		// Create a Stream
+		Stream<String> stream = Stream.of("a", "b", "c", "d");
+		stream.forEach(System.out::println);
+
+		// Create a Stream from sources
+		Collection<String> collections = Arrays.asList("Ram", "Shyam", "Ghanshyam", "Radheshyam", "Panwarilal");
+		Stream<String> stream2 = collections.stream();
+		stream2.forEach(System.out::println);
+
+		// Create a Stream from list
+		List<String> list = Arrays.asList("Ram", "Shyam", "Ghanshyam", "Radheshyam", "Panwarilal");
+		Stream<String> stream3 = list.stream();
+		stream3.forEach(System.out::println);
+
+		// Create a Stream from array
+		String[] strArray = { "e", "f", "g", "h" };
+		Stream<String> stream4 = Arrays.stream(strArray);
+		stream4.forEach(System.out::println);
+
+		// Create a Stream from set
+		Set<String> set = new HashSet<>(list);
+		Stream<String> stream5 = set.stream();
+		stream5.forEach(System.out::println);
+		
+		
+	}
+}
