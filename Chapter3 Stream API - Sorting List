@@ -1,0 +1,104 @@
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+class Employee {
+
+	private int id;
+	private String name;
+	private int salary;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getSalary() {
+		return salary;
+	}
+
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+
+	public Employee(int id, String name, int salary) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.salary = salary;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", salary=" + salary + "]";
+	}
+	
+	
+
+}
+
+public class Main2 {
+
+	public static void main(String[] args) {
+
+		List<String> list = new ArrayList<>();
+		list.add("PineApple");
+		list.add("Mango");
+		list.add("Apple");
+
+		// This thing will help you o sort the list using Ascending Order
+		List<String> fruitesList = list.stream().sorted().collect(Collectors.toList());
+		fruitesList.forEach(System.out::println);
+
+		List<String> fruitesList2 = list.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
+		fruitesList2.forEach(System.out::println);
+
+		List<String> fruitesList3 = list.stream().sorted((o1, o2) -> o1.compareTo(o2)).collect(Collectors.toList());
+		fruitesList3.forEach(System.out::println);
+
+		// This thing will help you o sort the list using Descending Order
+		List<String> fruitesList4 = list.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+		fruitesList4.forEach(System.out::println);
+
+		List<String> fruitesList5 = list.stream().sorted((o2, o1) -> o2.compareTo(o1)).collect(Collectors.toList());
+		fruitesList5.forEach(System.out::println);
+		
+		
+		
+		// Sort List based on Employee salary
+		List<Employee> listOfEmployee = new ArrayList<>();
+		listOfEmployee.add(new Employee(1,"Ritendra",34000));
+		listOfEmployee.add(new Employee(1,"Shyam",46000));
+		listOfEmployee.add(new Employee(1,"Ravi",87000));
+		listOfEmployee.add(new Employee(1,"puspa",23000));
+		
+		// First way to do that 
+		List<Employee> employees = listOfEmployee.stream().sorted(new Comparator<Employee>() {
+			public int compare(Employee e1, Employee e2) {
+				return e1.getSalary()-e2.getSalary();
+				}}).collect(Collectors.toList());
+		employees.forEach(System.out::println);
+		
+		
+		// Second way to do that
+		List<Employee> employees1 = listOfEmployee.stream().sorted((Employee e1, Employee e2)-> (e1.getSalary()-e2.getSalary())).collect(Collectors.toList());
+		employees1.forEach(System.out::println);
+		
+		
+		// How to solve in reversed Order
+		List<Employee> employees2 = listOfEmployee.stream().sorted(Comparator.comparingLong(Employee::getSalary).reversed()).collect(Collectors.toList());
+		employees2.forEach(System.out::println);
+	}
+}
